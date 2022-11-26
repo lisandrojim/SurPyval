@@ -64,7 +64,7 @@ class Gumbel_(ParametricFitter):
         >>> Gumbel.sf(x, 3, 2)
         array([0.69220063, 0.54523921, 0.36787944, 0.19229565, 0.06598804])
         """
-        return np.exp(-np.exp((x - mu)/sigma))
+        return 1 - np.exp(-np.exp(-(x - mu)/sigma))
 
     def cs(self, x, X, mu, sigma):
         return self.sf(x + X, mu, sigma) / self.sf(X, mu, sigma)
@@ -102,7 +102,7 @@ class Gumbel_(ParametricFitter):
         >>> Gumbel.ff(x, 3, 2)
         array([0.30779937, 0.45476079, 0.63212056, 0.80770435, 0.93401196])
         """
-        return 1 - np.exp(-np.exp((x - mu)/sigma))
+        return np.exp(-np.exp(-(x - mu)/sigma))
 
     def df(self, x, mu, sigma):
         r"""
@@ -172,7 +172,7 @@ class Gumbel_(ParametricFitter):
         array([0.18393972, 0.30326533, 0.5       , 0.82436064, 1.35914091])
         """
         z = (x - mu) / sigma
-        return (1/sigma) * np.exp(z)
+        return (1/sigma) * np.exp(-z)
 
     def Hf(self, x, mu, sigma):
         r"""
@@ -206,7 +206,7 @@ class Gumbel_(ParametricFitter):
         >>> Gumbel.Hf(x, 3, 2)
         array([0.36787944, 0.60653066, 1.        , 1.64872127, 2.71828183])
         """
-        return np.exp((x - mu)/sigma)
+        return np.exp(-(x - mu)/sigma)
 
     def qf(self, p, mu, sigma):
         r"""
